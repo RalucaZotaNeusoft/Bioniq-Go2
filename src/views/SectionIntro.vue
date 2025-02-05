@@ -1,7 +1,43 @@
 <script setup lang="ts">
+import { useRoute, useRouter } from "vue-router";
+
+const route = useRoute();
+const router = useRouter();
+
+const goNext = () => {
+  console.log(route.name);
+  switch (route.name) {
+    case 'section-intro':
+      router.push('question-radio');
+      break;
+    case 'question-radio':
+      router.push('question-checkbox');
+      break;
+    case 'question-checkbox':
+      router.push('question-boolean');
+      break;
+    case 'question-boolean':
+      router.push('section-intro');
+      break;
+    default:
+      break;
+  }
+};
+
+const navigate = (to: "BACK" | "FORWARD") => {
+  if (to === "BACK") {
+    console.log('back');
+
+  }
+  else {
+    console.log('forward');
+    goNext();
+  }
+};
 </script>
 <template>
-    <div>section intro</div>
+  <div>section intro
+    <button @click="() => navigate('FORWARD')">BEGIN</button>
+  </div>
 </template>
-<style>
-</style>
+<style></style>

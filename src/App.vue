@@ -6,6 +6,7 @@ import QuestionBoolean from './components/questions/QuestionBoolean.vue';
 import QuestionCheckbox from './components/questions/QuestionCheckbox.vue';
 import QuestionRadio from './components/questions/QuestionRadio.vue';
 import ContinueButton from './components/ContinueButton.vue';
+import BackButton from './components/BackButton.vue';
 
 const quiz_data = {
   quiz_id: 1,
@@ -81,6 +82,7 @@ We will input your responses into our patented algorithm that utilizes our 10 ye
   <RouterLink to="/question-checkbox" :question="quiz_data.questions[1]">question-checkbox</RouterLink>
   <RouterLink to="/question-boolean" :question="quiz_data.questions[2]">question-boolean</RouterLink>
   <RouterView />
+  <BackButton/>
   <ContinueButton />
   <WhyWeAsk :hint="quiz_data.questions[0].hint" />
 </template>
