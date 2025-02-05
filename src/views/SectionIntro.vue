@@ -1,8 +1,7 @@
 <script setup lang="ts">
 </script>
-
 <template>
-  <main>
-    <div>home</div>
-  </main>
+    <div>section intro</div>
 </template>
+<style>
+</style>
