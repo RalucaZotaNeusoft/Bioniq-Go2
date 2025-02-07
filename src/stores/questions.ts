@@ -1,12 +1,5 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import type { Questions } from "@/types/uiTypes";
-import WhyWeAsk from './components/WhyWeAsk.vue';
-import QuestionBoolean from './components/questions/QuestionYesNo.vue';
-import QuestionCheckbox from './components/questions/QuestionCheckbox.vue';
-import QuestionRadio from './components/questions/QuestionRadio.vue';
-import ContinueButton from './components/ContinueButton.vue';
-import BackButton from './components/BackButton.vue';
+import { ref, computed } from 'vue'
+import { defineStore } from 'pinia'
 
 const quiz_data = {
   quiz_id: 1,
@@ -36,7 +29,7 @@ We will input your responses into our patented algorithm that utilizes our 10 ye
     },
     {
       category: "HEALTH GOALS",
-      tag: "HEALTH-GOALS",
+      tag: "HEALTH GOALS",
       type: "checkbox",
       title: "Which sex were you assigned at birth?",
       answers: [
@@ -73,18 +66,15 @@ We will input your responses into our patented algorithm that utilizes our 10 ye
   ],
   legal_links: [{ title: "Privacy policy", href: "https://bioniq.com/legals" }],
 };
-</script>
 
-<template>
-  <RouterLink to="/">Home</RouterLink>
-  <RouterLink to="/section-intro">Section Intro</RouterLink>
-  <RouterLink to="/question-radio">question-radio></RouterLink>
-  <RouterLink to="/question-checkbox" :question="quiz_data.questions[1]">question-checkbox</RouterLink>
-  <RouterLink to="/question-boolean" :question="quiz_data.questions[2]">question-boolean</RouterLink>
-  <RouterView />
-  <BackButton/>
-  <ContinueButton />
-  <WhyWeAsk :hint="quiz_data.questions[0].hint" />
-</template>
+export const useQuestionsStore = defineStore('questions', () => {
+  const selectedValues = ref<Array<any>>([]);
+  console.log('selected values', selectedValues.value);
+  
+  // const doubleCount = computed(() => count.value * 2)
+  // function increment() {
+  //   count.value++
+  // }
 
-<style scoped></style>
+  return { selectedValues }
+})

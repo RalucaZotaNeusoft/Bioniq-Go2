@@ -94,7 +94,7 @@ const router = createRouter({
     {
       path: '/question-boolean',
       name: 'question-boolean',
-      component: () => import('../components/questions/QuestionBoolean.vue'),
+      component: () => import('../components/questions/QuestionYesNo.vue'),
       props: { question: quiz_data.questions[2]}
     },
   ],
