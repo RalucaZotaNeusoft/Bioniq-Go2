@@ -7,7 +7,7 @@ import type { QuestionOption } from "@/types/uiTypes";
 const questionsStore = useQuestionsStore();
 const { selectedValues } = storeToRefs(questionsStore);
 const props = defineProps<{
-    question: QuestionOption
+  question: QuestionOption
 }>()
 
 const selectedInput = ref<any>(null);
@@ -17,23 +17,52 @@ const handleAnswer = (value: any) => {
     [props.question.tag]: value
   };
   selectedValues.value = selectedInput.value;
+
 };
 </script>
 <template>
   <div>
     <h2>{{ question?.category }}</h2>
-        <h2>{{ question?.title }}</h2>
-        <div v-for="answer in question?.answers" :key="answer.value" class="input-container">
-            <input type="radio" :value="answer.value" @change="handleAnswer(answer.value)"/>
-            <label>{{ answer.label }}</label>
-            <div>{{selectedValues}}</div>
-        </div>   
-</div>
+    <h2>{{ question?.title }}</h2>
+    <div v-for="answer in question?.answers" :key="answer.value" class="answer-container">
+      <label>
+        <input type="radio" 
+               name="quiz" 
+               :value="answer.value"
+               @change="handleAnswer(answer.value)" />
+        <div class="answer-item">{{ answer.label }}</div>
+      </label>
+      <div>{{ selectedValues }}</div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-.input-container {
+.answer-container {
   display: flex;
-  gap: 5px;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px;
+}
+
+.answer-item {
+  padding: 8px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.answer-item:hover {
+  background-color: #f9fafb;
+}
+
+.answer-container input {
+  display: none;
+}
+
+.answer-container input:checked + .answer-item {
+  border: 2px solid black;
 }
 </style>
